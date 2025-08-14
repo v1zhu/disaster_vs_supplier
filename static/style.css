@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(255, 255, 255); /* change to any color you like */
+    font-family: Arial, sans-serif; /* optional, for nicer font */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #000000;   /* dark background */
+    padding: 10px;
+    position: fixed;
+    top: 0;                 /* sticks to the very top */
+    left: 0;
+    width: 100%;   
+    display: flex;             
+    justify-content: center;   
+    gap: 20px;    
+    z-index: 1000;             
+}
+
+.navbar a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 8px 12px;
+    display: inline-block;
+    transition: background-color 0.3s; /* smooth hover */
+}
+
+.navbar a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+body {
+    font-family: "Georgia", sans-serif;
+    margin: 0;
+    padding-top: 50px;
+}
+
+.tableauPlaceholder {          
+    position: relative;
+    display: block;
+    max-width: 900px;         /* change to your preferred width */
+    width: 100%;
+    left: 30%; 
+}

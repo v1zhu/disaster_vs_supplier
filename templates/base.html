@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="{{ url_for('heatmap') }}">Heatmap</a>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('second_page') }}"
+        >Disaster and Supplier Over the Years</a
+      >
+    </div>
+
+    <div class="content">{% block content %}{% endblock %}</div>
+  </body>
+</html>

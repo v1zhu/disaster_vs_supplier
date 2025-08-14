@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1 style="text-align:center;">
+        {% if chosen_country %}
+            How Natural Disaster Impact Supplier Count for {{ chosen_country }}
+        {% else %}
+            Enter Country to See Data
+        {% endif %}
+    </h1>
+        
+    <!--search bar-->
+    <div style=" display: flex; justify-content: center; margin-top: 20px; gap: 10px;">
+        <form method="post" style="display: flex; gap: 10px;">
+            <input list="countries" name="country" placeholder="Select Country" required
+            style="padding: 8px; font-size: 16px;">
+            <datalist id="countries">
+                {% for country in countries %}
+                    <option value="{{ country }}">
+                {% endfor %}
+            </datalist>
+            <button type="submit" style="padding: 8px 16px; font-size: 16px;">Search</button>
+        </form>
+    </div>
+</div>
+    <!--for graph-->
+    {% if chosen_country %}
+        {% if plot_url_disaster%}
+            {% if data_available_first and data_available_second %}
+            <div>
+                <img src="data:image/png;base64,{{ plot_url_disaster }}" alt="Plot" style="max-width: 50%; display: block; margin: 0 auto; margin-top: 20px;">
+            </div>
+            <div style="display: flex; gap: 20px; justify-content: center; width: 100%; margin-top: 20px; margin-left: 10px; margin-right: 10px;">
+                <img src="data:image/png;base64,{{ plot_url_first }}" alt="Plot" style="max-width: 50%;">
+                <img src="data:image/png;base64,{{ plot_url_second }}" alt="Plot" style="max-width: 50%;">
+            </div> 
+
+            <style>
+                .container {
+                display: flex;
+                justify-content: space-evenly; /* or center */
+                gap: 50px;
+                margin-top: 20px;
+                width: 100%;                     /* full width of parent */
+                }
+            </style>
+            <div class="container">
+                <p>Correlation between disaster and first tier supplier: {{correlation_first}}</p>
+                <p>Correlation between disaster and second tier supplier: {{correlation_second}}</p>
+            </div>
+
+            {% elif data_available_first%}
+            <div style="display: flex; gap: 20px; margin-left: 10px; margin-right: 10px; align-items: flex-start;">
+                <img src="data:image/png;base64,{{ plot_url_disaster }}" alt="Plot" style="max-width: 50%;">
+                <img src="data:image/png;base64,{{ plot_url_first }}" alt="Plot" style="max-width: 50%;">
+            </div>
+            <p style="text-align: center;">
+                    Data for second tier supplier is not avaiable for this country.
+                </p>
+                <p style="text-align: center;">
+                    Correlation between disaster and first tier supplier: {{correlation_first}}
+                </p>
+            {% elif data_available_second%}
+              
+            <div style="display: flex; gap: 20px; margin-left: 10px; margin-right: 10px; align-items: flex-start;">
+                <img src="data:image/png;base64,{{ plot_url_disaster }}" alt="Plot" style="max-width: 50%;">
+                <img src="data:image/png;base64,{{ plot_url_second }}" alt="Plot" style="max-width: 50%;">
+            <div>
+                 <p style="text-align: center;">Data for first tier supplier is not available for this country.</p>
+                <p style="text-align: center;">
+                    Correlation between disaster and second tier supplier: {{correlation_second}}
+                </p>
+            {% else %}
+                <div>
+                <img src="data:image/png;base64,{{ plot_url_disaster }}" alt="Plot" style="max-width: 50%; display: block; margin: 0 auto;">
+                </div>
+                <p style="text-align: center;">No supplier data available for this country.</p>
+            {% endif %}
+        {% else %}
+            <p style="text-align: center;">No data available for this country.</p>
+        {% endif %}
+
+    {% else %}
+        <!-- NEW: Default graphs when no country is chosen -->
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px; margin-left: 10px; margin-right: 10px;">
+            <img src="data:image/png;base64,{{ plot_url_disaster_total }}" alt="Plot" style="max-width: 50%;">
+            <img src="data:image/png;base64,{{ plot_url_cross_total }}" alt="Plot" style="max-width: 50%;">
+        </div>
+    {% endif %}
+    {% endblock %}
+
