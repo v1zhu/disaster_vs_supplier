@@ -45,7 +45,7 @@ def code_to_name(code):
 
 # data frame for the graph
 merged_disaster = pd.read_csv('merged_disaster1.csv')
-cross_tier = pd.read_csv('cross_tier_GB_only_deduplicated1.xls')
+cross_tier = pd.read_csv('cross_tier_GB_only_deduplicated.xls')
 country_list = sorted(merged_disaster.groupby("Country").count().index)
 cross_tier['First_Tier_Country'] = cross_tier['First_Tier_Country'].apply(code_to_name)
 cross_tier['Second_Tier_Country'] = cross_tier['Second_Tier_Country'].apply(code_to_name)
