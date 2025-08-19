@@ -6,8 +6,7 @@ This project explores how disaster count in different countries impact the count
 
 **1. Clone the resporitory**  
 git clone https://github.com/v1zhu/disaster_vs_supplier.git  
- cd disaster_vs_supplier  
- cd your-repo-name  
+ cd disaster_vs_supplier    
 **2. Create a virtual environment**  
  Windows: venv\Scripts\activate  
  Mac/Linux: source venv/bin/activate  
